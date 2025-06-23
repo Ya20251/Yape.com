@@ -5,19 +5,19 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Comprobante Yape</title>
   <style>
+    /* Estilos generales */
     body {
       font-family: 'Segoe UI', sans-serif;
       background: #5f259f;
       color: #333;
       display: flex;
-      justify-content: center;
+      flex-direction: column;
       align-items: center;
       padding: 20px;
       overflow-x: hidden;
       position: relative;
       min-height: 100vh;
     }
-
     .tirita {
       position: absolute;
       width: 6px;
@@ -28,28 +28,26 @@
       z-index: 0;
       transform: rotate(20deg);
     }
-
-    .comprobante, .pantalla-acceso {
+    .comprobante, .pantalla-acceso, .historial-envio {
       background: #fff;
       border-radius: 15px;
       padding: 15px;
-      width: 330px;
+      width: 90%;
+      max-width: 330px;
       box-shadow: 0 0 15px rgba(0,0,0,0.2);
       position: relative;
       z-index: 1;
       overflow: hidden;
+      margin-bottom: 20px;
     }
-
     .pantalla-acceso {
       text-align: center;
     }
-
     .pantalla-acceso h2 {
       color: #9821c0;
       font-size: 20px;
       margin-bottom: 15px;
     }
-
     .pantalla-acceso input {
       padding: 10px;
       font-size: 16px;
@@ -60,7 +58,6 @@
       text-align: center;
       font-weight: bold;
     }
-
     .pantalla-acceso button {
       padding: 10px;
       width: 100%;
@@ -71,18 +68,15 @@
       border-radius: 8px;
       cursor: pointer;
     }
-
     .pantalla-acceso .contacto {
       margin-top: 12px;
       font-size: 14px;
     }
-
     .pantalla-acceso .contacto a {
       color: #E1306C;
       font-weight: bold;
       text-decoration: none;
     }
-
     .logo, .compartir {
       position: absolute;
       width: 45px;
@@ -91,17 +85,14 @@
       object-fit: contain;
       border: 2px solid #ccc;
     }
-
     .logo {
       top: 15px;
       right: 15px;
     }
-
     .compartir {
       top: 15px;
       left: 15px;
     }
-
     .texto-compartir {
       position: absolute;
       top: 65px;
@@ -110,24 +101,20 @@
       color: #00aaff;
       font-weight: bold;
     }
-
     .titulo {
       color: #9821c0;
       font-weight: bold;
       font-size: 20px;
       margin-top: 70px;
     }
-
     .monto {
       font-size: 28px;
       font-weight: bold;
       margin: 5px 0 15px 0;
     }
-
     .dato {
       margin: 5px 0;
     }
-
     .codigo-seguridad {
       display: flex;
       align-items: center;
@@ -136,29 +123,24 @@
       padding: 5px;
       border-radius: 10px;
     }
-
     .codigo-seguridad span {
       font-weight: bold;
       margin-right: 10px;
     }
-
     .codigo-box {
       display: flex;
       gap: 5px;
     }
-
     .codigo-box input {
       width: 30px;
       text-align: center;
       font-weight: bold;
       font-size: 18px;
     }
-
     .info {
       font-size: 13px;
       color: gray;
     }
-
     .nuevo-btn {
       margin-top: 20px;
       background: #00c1a8;
@@ -169,7 +151,6 @@
       font-weight: bold;
       cursor: pointer;
     }
-
     input[type="text"], input[type="number"], input[type="date"], input[type="time"] {
       border: none;
       border-bottom: 1px solid #ccc;
@@ -177,7 +158,6 @@
       font-weight: bold;
       width: 100%;
     }
-
     .mas-yape-titulo {
       margin-top: 25px;
       font-weight: bold;
@@ -185,7 +165,6 @@
       color: #6c30a6;
       text-align: center;
     }
-
     .imagenes-extra {
       display: flex;
       justify-content: center;
@@ -193,7 +172,6 @@
       gap: 10px;
       flex-wrap: wrap;
     }
-
     .imagenes-extra img {
       width: 140px;
       height: 110px;
@@ -201,7 +179,6 @@
       border-radius: 12px;
       border: 2px solid #ccc;
     }
-
     .imagenes-extra input[type="file"] {
       position: absolute;
       width: 140px;
@@ -209,11 +186,9 @@
       opacity: 0;
       cursor: pointer;
     }
-
     .upload-wrapper {
       position: relative;
     }
-
     .btn-pantalla {
       margin-top: 20px;
       background: #0077ff;
@@ -224,7 +199,6 @@
       font-weight: bold;
       cursor: pointer;
     }
-
     .btn-instagram {
       margin-top: 10px;
       background: #E1306C;
@@ -235,17 +209,64 @@
       font-weight: bold;
       cursor: pointer;
     }
-
     .icono-descarga {
       display: block;
       width: 40px;
       margin: 10px auto;
       cursor: pointer;
     }
+
+    /* Estilos para el Historial de Envío */
+    .historial-envio {
+      background: linear-gradient(135deg, #ffffff, #d8b4f8);
+      color: #333;
+      text-align: center;
+      padding: 20px;
+      border-radius: 15px;
+      position: relative;
+    }
+    .historial-envio .titulo {
+      font-size: 22px;
+      font-weight: bold;
+      margin-bottom: 10px;
+      color: #5f259f;
+    }
+    .historial-envio .monto {
+      font-size: 32px;
+      font-weight: bold;
+      margin: 10px 0;
+      color: #9821c0;
+    }
+    .historial-envio .dato {
+      margin: 8px 0;
+      font-size: 16px;
+      color: #555;
+    }
+    .historial-envio .info-adicional {
+      margin-top: 15px;
+      font-size: 14px;
+      color: #777;
+    }
+    .historial-envio .imagenes-extra {
+      margin-top: 15px;
+    }
+    .historial-envio .imagenes-extra img {
+      width: 120px;
+      height: 90px;
+      object-fit: cover;
+      border-radius: 12px;
+      border: 2px solid #fff;
+    }
+    .historial-envio .btn-pantalla {
+      background: #9821c0;
+      margin-top: 15px;
+    }
+    .historial-envio.fullscreen .btn-pantalla {
+      display: none; /* Ocultar el botón en pantalla completa */
+    }
   </style>
 </head>
 <body>
-
   <!-- Fondo con tiritas -->
   <script>
     const colores = ['#ff2e63', '#08d9d6', '#ffce00', '#6a67ce', '#ff6f61'];
@@ -260,7 +281,6 @@
       document.body.appendChild(tirita);
     }
   </script>
-
   <!-- Pantalla de acceso -->
   <div class="pantalla-acceso" id="acceso">
     <h2>Código de acceso</h2>
@@ -268,37 +288,30 @@
     <button onclick="validarCodigo()">Ingresar</button>
     <div class="contacto">O contactar a <a href="https://www.instagram.com/pumbafloo?igsh=MXdmOW1rcG5ybzRleg==" target="_blank">@pumbafloo</a></div>
   </div>
-
   <!-- Contenido oculto hasta ingresar código correcto -->
   <div class="comprobante" id="captura" style="display:none;">
     <input type="file" accept="image/*" onchange="cargarLogo(event)" style="position:absolute; top:15px; right:15px; opacity:0; width:45px; height:45px; cursor:pointer; z-index:2;">
     <img src="3" alt="Logo" class="logo" id="logoImg" />
     <div class="texto-compartir">Compartir</div>
-
     <input type="file" accept="image/*" onchange="cargarCompartir(event)" style="position:absolute; top:15px; left:15px; opacity:0; width:45px; height:45px; cursor:pointer; z-index:2;">
     <img src="4" alt="Compartir" class="compartir" id="compartirImg" />
-
     <div class="titulo">¡Yapeaste!</div>
-    <div class="monto">S/ <input type="number" value="55.00" step="0.01"/></div>
-    <div class="dato"><input type="text" value="Ana Carr Q." placeholder="Nombre del receptor"/></div>
-    <div class="dato info">📅 <input type="date" value="2025-04-01"/> 🕒 <input type="time" value="08:14"/></div>
-
+    <div class="monto">S/ <input type="number" value="55.00" step="0.01" oninput="actualizarHistorial()"/></div>
+    <div class="dato"><input type="text" value="Ana Carr Q." placeholder="Nombre del receptor" oninput="actualizarHistorial()"/></div>
+    <div class="dato info">📅 <input type="date" value="2025-04-01" oninput="actualizarHistorial()"/> 🕒 <input type="time" value="08:14" oninput="actualizarHistorial()"/></div>
     <div class="codigo-seguridad">
       <span>CÓDIGO DE SEGURIDAD</span>
       <div class="codigo-box">
-        <input type="text" maxlength="1" value="0"/>
-        <input type="text" maxlength="1" value="0"/>
-        <input type="text" maxlength="1" value="6"/>
+        <input type="text" maxlength="1" value="0" oninput="actualizarHistorial()"/>
+        <input type="text" maxlength="1" value="0" oninput="actualizarHistorial()"/>
+        <input type="text" maxlength="1" value="6" oninput="actualizarHistorial()"/>
       </div>
     </div>
-
     <div class="info">DATOS DE LA TRANSACCIÓN</div>
-    <div class="dato">Nro. de celular: <input type="text" value="*** *** 986"/></div>
-    <div class="dato">Destino: <input type="text" value="Yape"/></div>
-    <div class="dato">Nro. de operación: <input type="text" value="03372006"/></div>
-
+    <div class="dato">Nro. de celular: <input type="text" value="*** *** 986" oninput="actualizarHistorial()"/></div>
+    <div class="dato">Destino: <input type="text" value="Yape" oninput="actualizarHistorial()"/></div>
+    <div class="dato">Nro. de operación: <input type="text" value="03372006" oninput="actualizarHistorial()"/></div>
     <div class="nuevo-btn">NUEVO YAPEO</div>
-
     <div class="mas-yape-titulo">Más en Yape</div>
     <div class="imagenes-extra">
       <div class="upload-wrapper">
@@ -310,10 +323,29 @@
         <img id="img2" src="2" alt="Imagen 2">
       </div>
     </div>
-
     <div class="btn-pantalla" onclick="verPantallaCompleta()">Ver en pantalla completa</div>
     <div class="btn-instagram" onclick="window.open('https://www.instagram.com/pumbafloo?igsh=MXdmOW1rcG5ybzRleg==', '_blank')">Ir a Instagram</div>
     <img src="https://cdn-icons-png.flaticon.com/512/159/159604.png" alt="Descargar" class="icono-descarga" onclick="descargarComprobante()" />
+  </div>
+
+  <!-- Historial de Envío -->
+  <div class="historial-envio" id="historial" style="display:none;">
+    <div class="titulo">Historial de Envío</div>
+    <div class="monto" id="historialMonto">S/ 55.00</div>
+    <div class="dato" id="historialReceptor">Ana Carr Q.</div>
+    <div class="dato" id="historialFecha">📅 2025-04-01 🕒 08:14</div>
+    <div class="dato" id="historialCodigo">Código: 006</div>
+    <div class="dato" id="historialCelular">Celular: *** *** 986</div>
+    <div class="dato" id="historialDestino">Destino: Yape</div>
+    <div class="dato" id="historialOperacion">Operación: 03372006</div>
+    <div class="info-adicional">
+      Este comprobante es válido como prueba de transacción. Guarda este registro para futuras referencias.
+    </div>
+    <div class="imagenes-extra">
+      <img id="historialImg1" src="1" alt="Imagen 1">
+      <img id="historialImg2" src="2" alt="Imagen 2">
+    </div>
+    <div class="btn-pantalla" onclick="verHistorialCompleto()">Ver en pantalla completa</div>
   </div>
 
   <!-- Scripts -->
@@ -324,41 +356,51 @@
       if (clave === "0000202506") {
         document.getElementById("acceso").style.display = "none";
         document.getElementById("captura").style.display = "block";
+        document.getElementById("historial").style.display = "block";
       } else {
         alert("Código incorrecto. Contacta a @pumbafloo en Instagram.");
       }
     }
-
     function mostrarImagen(input, id) {
       const file = input.files[0];
       const reader = new FileReader();
       reader.onload = function(e) {
         document.getElementById(id).src = e.target.result;
+        document.getElementById(`historial${id}`).src = e.target.result; // Actualizar en historial
       };
       if (file) reader.readAsDataURL(file);
     }
-
     function cargarLogo(event) {
       const file = event.target.files[0];
       const reader = new FileReader();
       reader.onload = e => document.getElementById('logoImg').src = e.target.result;
       if (file) reader.readAsDataURL(file);
     }
-
     function cargarCompartir(event) {
       const file = event.target.files[0];
       const reader = new FileReader();
       reader.onload = e => document.getElementById('compartirImg').src = e.target.result;
       if (file) reader.readAsDataURL(file);
     }
-
     function verPantallaCompleta() {
       const el = document.getElementById('captura');
       if (el.requestFullscreen) el.requestFullscreen();
       else if (el.webkitRequestFullscreen) el.webkitRequestFullscreen();
       else if (el.msRequestFullscreen) el.msRequestFullscreen();
     }
-
+    function verHistorialCompleto() {
+      const el = document.getElementById('historial');
+      if (el.requestFullscreen) {
+        el.classList.add('fullscreen');
+        el.requestFullscreen();
+      } else if (el.webkitRequestFullscreen) {
+        el.classList.add('fullscreen');
+        el.webkitRequestFullscreen();
+      } else if (el.msRequestFullscreen) {
+        el.classList.add('fullscreen');
+        el.msRequestFullscreen();
+      }
+    }
     function descargarComprobante() {
       setTimeout(() => {
         html2canvas(document.getElementById("captura")).then(canvas => {
@@ -368,6 +410,37 @@
           link.click();
         });
       }, 5000);
+    }
+    function actualizarHistorial() {
+      // Actualizar monto
+      const monto = document.querySelector('#captura .monto input').value; 
+      document.getElementById('historialMonto').textContent = `S/ ${monto}`;
+
+      // Actualizar receptor
+      const receptor = document.querySelector('#captura .dato input').value;
+      document.getElementById('historialReceptor').textContent = receptor;
+
+      // Actualizar fecha
+      const fecha = document.querySelector('#captura .dato input[type="date"]').value;
+      const hora = document.querySelector('#captura .dato input[type="time"]').value;
+      document.getElementById('historialFecha').textContent = `📅 ${fecha} 🕒 ${hora}`;
+
+      // Actualizar código de seguridad
+      const codigoInputs = document.querySelectorAll('#captura .codigo-box input');
+      const codigo = Array.from(codigoInputs).map(input => input.value).join('');
+      document.getElementById('historialCodigo').textContent = `Código: ${codigo}`;
+
+      // Actualizar celular
+      const celular = document.querySelector('#captura .dato:nth-child(7) input').value;
+      document.getElementById('historialCelular').textContent = `Celular: ${celular}`;
+
+      // Actualizar destino
+      const destino = document.querySelector('#captura .dato:nth-child(8) input').value;
+      document.getElementById('historialDestino').textContent = `Destino: ${destino}`;
+
+      // Actualizar número de operación
+      const operacion = document.querySelector('#captura .dato:nth-child(9) input').value;
+      document.getElementById('historialOperacion').textContent = `Operación: ${operacion}`;
     }
   </script>
 </body>

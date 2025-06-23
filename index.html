@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Comprobante Yape</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #5f259f;
+      color: #333;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      overflow-x: hidden;
+      position: relative;
+      min-height: 100vh;
+    }
+
+    .tirita {
+      position: absolute;
+      width: 6px;
+      height: 15px;
+      background-color: red;
+      opacity: 0.8;
+      border-radius: 2px;
+      z-index: 0;
+      transform: rotate(20deg);
+    }
+
+    .comprobante, .pantalla-acceso {
+      background: #fff;
+      border-radius: 15px;
+      padding: 15px;
+      width: 330px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.2);
+      position: relative;
+      z-index: 1;
+      overflow: hidden;
+    }
+
+    .pantalla-acceso {
+      text-align: center;
+    }
+
+    .pantalla-acceso h2 {
+      color: #9821c0;
+      font-size: 20px;
+      margin-bottom: 15px;
+    }
+
+    .pantalla-acceso input {
+      padding: 10px;
+      font-size: 16px;
+      width: 90%;
+      margin-bottom: 10px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      text-align: center;
+      font-weight: bold;
+    }
+
+    .pantalla-acceso button {
+      padding: 10px;
+      width: 100%;
+      background-color: #6a67ce;
+      color: white;
+      font-weight: bold;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    .pantalla-acceso .contacto {
+      margin-top: 12px;
+      font-size: 14px;
+    }
+
+    .pantalla-acceso .contacto a {
+      color: #E1306C;
+      font-weight: bold;
+      text-decoration: none;
+    }
+
+    .logo, .compartir {
+      position: absolute;
+      width: 45px;
+      height: 45px;
+      border-radius: 12px;
+      object-fit: contain;
+      border: 2px solid #ccc;
+    }
+
+    .logo {
+      top: 15px;
+      right: 15px;
+    }
+
+    .compartir {
+      top: 15px;
+      left: 15px;
+    }
+
+    .texto-compartir {
+      position: absolute;
+      top: 65px;
+      right: 10px;
+      font-size: 12px;
+      color: #00aaff;
+      font-weight: bold;
+    }
+
+    .titulo {
+      color: #9821c0;
+      font-weight: bold;
+      font-size: 20px;
+      margin-top: 70px;
+    }
+
+    .monto {
+      font-size: 28px;
+      font-weight: bold;
+      margin: 5px 0 15px 0;
+    }
+
+    .dato {
+      margin: 5px 0;
+    }
+
+    .codigo-seguridad {
+      display: flex;
+      align-items: center;
+      margin: 10px 0;
+      border: 2px solid #e0e0e0;
+      padding: 5px;
+      border-radius: 10px;
+    }
+
+    .codigo-seguridad span {
+      font-weight: bold;
+      margin-right: 10px;
+    }
+
+    .codigo-box {
+      display: flex;
+      gap: 5px;
+    }
+
+    .codigo-box input {
+      width: 30px;
+      text-align: center;
+      font-weight: bold;
+      font-size: 18px;
+    }
+
+    .info {
+      font-size: 13px;
+      color: gray;
+    }
+
+    .nuevo-btn {
+      margin-top: 20px;
+      background: #00c1a8;
+      color: white;
+      padding: 10px;
+      text-align: center;
+      border-radius: 10px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    input[type="text"], input[type="number"], input[type="date"], input[type="time"] {
+      border: none;
+      border-bottom: 1px solid #ccc;
+      padding: 3px;
+      font-weight: bold;
+      width: 100%;
+    }
+
+    .mas-yape-titulo {
+      margin-top: 25px;
+      font-weight: bold;
+      font-size: 14px;
+      color: #6c30a6;
+      text-align: center;
+    }
+
+    .imagenes-extra {
+      display: flex;
+      justify-content: center;
+      margin-top: 10px;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .imagenes-extra img {
+      width: 140px;
+      height: 110px;
+      object-fit: cover;
+      border-radius: 12px;
+      border: 2px solid #ccc;
+    }
+
+    .imagenes-extra input[type="file"] {
+      position: absolute;
+      width: 140px;
+      height: 110px;
+      opacity: 0;
+      cursor: pointer;
+    }
+
+    .upload-wrapper {
+      position: relative;
+    }
+
+    .btn-pantalla {
+      margin-top: 20px;
+      background: #0077ff;
+      color: white;
+      padding: 10px;
+      border-radius: 10px;
+      text-align: center;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .btn-instagram {
+      margin-top: 10px;
+      background: #E1306C;
+      color: white;
+      padding: 10px;
+      border-radius: 10px;
+      text-align: center;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .icono-descarga {
+      display: block;
+      width: 40px;
+      margin: 10px auto;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Fondo con tiritas -->
+  <script>
+    const colores = ['#ff2e63', '#08d9d6', '#ffce00', '#6a67ce', '#ff6f61'];
+    for (let i = 0; i < 150; i++) {
+      const tirita = document.createElement('div');
+      tirita.className = 'tirita';
+      tirita.style.left = Math.random() * window.innerWidth + 'px';
+      tirita.style.top = Math.random() * window.innerHeight + 'px';
+      tirita.style.backgroundColor = colores[Math.floor(Math.random() * colores.length)];
+      tirita.style.opacity = Math.random().toFixed(2);
+      tirita.style.transform = `rotate(${Math.random() * 360}deg)`;
+      document.body.appendChild(tirita);
+    }
+  </script>
+
+  <!-- Pantalla de acceso -->
+  <div class="pantalla-acceso" id="acceso">
+    <h2>Código de acceso</h2>
+    <input type="password" id="clave" placeholder="Ingresa el código" maxlength="15">
+    <button onclick="validarCodigo()">Ingresar</button>
+    <div class="contacto">O contactar a <a href="https://www.instagram.com/pumbafloo?igsh=MXdmOW1rcG5ybzRleg==" target="_blank">@pumbafloo</a></div>
+  </div>
+
+  <!-- Contenido oculto hasta ingresar código correcto -->
+  <div class="comprobante" id="captura" style="display:none;">
+    <input type="file" accept="image/*" onchange="cargarLogo(event)" style="position:absolute; top:15px; right:15px; opacity:0; width:45px; height:45px; cursor:pointer; z-index:2;">
+    <img src="3" alt="Logo" class="logo" id="logoImg" />
+    <div class="texto-compartir">Compartir</div>
+
+    <input type="file" accept="image/*" onchange="cargarCompartir(event)" style="position:absolute; top:15px; left:15px; opacity:0; width:45px; height:45px; cursor:pointer; z-index:2;">
+    <img src="4" alt="Compartir" class="compartir" id="compartirImg" />
+
+    <div class="titulo">¡Yapeaste!</div>
+    <div class="monto">S/ <input type="number" value="55.00" step="0.01"/></div>
+    <div class="dato"><input type="text" value="Ana Carr Q." placeholder="Nombre del receptor"/></div>
+    <div class="dato info">📅 <input type="date" value="2025-04-01"/> 🕒 <input type="time" value="08:14"/></div>
+
+    <div class="codigo-seguridad">
+      <span>CÓDIGO DE SEGURIDAD</span>
+      <div class="codigo-box">
+        <input type="text" maxlength="1" value="0"/>
+        <input type="text" maxlength="1" value="0"/>
+        <input type="text" maxlength="1" value="6"/>
+      </div>
+    </div>
+
+    <div class="info">DATOS DE LA TRANSACCIÓN</div>
+    <div class="dato">Nro. de celular: <input type="text" value="*** *** 986"/></div>
+    <div class="dato">Destino: <input type="text" value="Yape"/></div>
+    <div class="dato">Nro. de operación: <input type="text" value="03372006"/></div>
+
+    <div class="nuevo-btn">NUEVO YAPEO</div>
+
+    <div class="mas-yape-titulo">Más en Yape</div>
+    <div class="imagenes-extra">
+      <div class="upload-wrapper">
+        <input type="file" accept="image/*" onchange="mostrarImagen(this, 'img1')">
+        <img id="img1" src="1" alt="Imagen 1">
+      </div>
+      <div class="upload-wrapper">
+        <input type="file" accept="image/*" onchange="mostrarImagen(this, 'img2')">
+        <img id="img2" src="2" alt="Imagen 2">
+      </div>
+    </div>
+
+    <div class="btn-pantalla" onclick="verPantallaCompleta()">Ver en pantalla completa</div>
+    <div class="btn-instagram" onclick="window.open('https://www.instagram.com/pumbafloo?igsh=MXdmOW1rcG5ybzRleg==', '_blank')">Ir a Instagram</div>
+    <img src="https://cdn-icons-png.flaticon.com/512/159/159604.png" alt="Descargar" class="icono-descarga" onclick="descargarComprobante()" />
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+  <script>
+    function validarCodigo() {
+      const clave = document.getElementById("clave").value;
+      if (clave === "0000202506") {
+        document.getElementById("acceso").style.display = "none";
+        document.getElementById("captura").style.display = "block";
+      } else {
+        alert("Código incorrecto. Contacta a @pumbafloo en Instagram.");
+      }
+    }
+
+    function mostrarImagen(input, id) {
+      const file = input.files[0];
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        document.getElementById(id).src = e.target.result;
+      };
+      if (file) reader.readAsDataURL(file);
+    }
+
+    function cargarLogo(event) {
+      const file = event.target.files[0];
+      const reader = new FileReader();
+      reader.onload = e => document.getElementById('logoImg').src = e.target.result;
+      if (file) reader.readAsDataURL(file);
+    }
+
+    function cargarCompartir(event) {
+      const file = event.target.files[0];
+      const reader = new FileReader();
+      reader.onload = e => document.getElementById('compartirImg').src = e.target.result;
+      if (file) reader.readAsDataURL(file);
+    }
+
+    function verPantallaCompleta() {
+      const el = document.getElementById('captura');
+      if (el.requestFullscreen) el.requestFullscreen();
+      else if (el.webkitRequestFullscreen) el.webkitRequestFullscreen();
+      else if (el.msRequestFullscreen) el.msRequestFullscreen();
+    }
+
+    function descargarComprobante() {
+      setTimeout(() => {
+        html2canvas(document.getElementById("captura")).then(canvas => {
+          const link = document.createElement('a');
+          link.download = "comprobante-yape.png";
+          link.href = canvas.toDataURL("image/png");
+          link.click();
+        });
+      }, 5000);
+    }
+  </script>
+</body>
+</html>
